@@ -1,0 +1,98 @@
+/* Changing html defaults */
+:root {
+  font-size: 16px;
+}
+html,
+body,
+#root {
+  height: 100%;
+  box-sizing: border-box;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/* End change */
+
+/* Global card style */
+.card-container {
+  padding: 7rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.card {
+  max-width: 71.25rem;
+  margin-bottom: auto;
+}
+.card-content {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+/* End styles */
+
+/* Global form styles */
+.from-header {
+  margin-bottom: 1rem !important;
+}
+.form {
+  width: 25rem;
+  margin-top: 7rem;
+  margin-bottom: auto;
+}
+.form-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.form-content {
+  width: 85%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.form-button {
+  margin: 0 auto !important;
+  margin-top: 1rem !important;
+}
+.form-button:hover {
+  background-color: #339637 !important;
+}
+/* End styles */
+
+/* Changing text input field styles */
+.MuiTextField-root {
+  color: #ffffff !important;
+  margin-bottom: 1rem !important;
+}
+.MuiTextField-root label {
+  color: #ffffff !important;
+}
+.MuiFormLabel-root.Mui-focused {
+  color: #ffffff !important;
+}
+.MuiInput-root {
+  color: #ffffff !important;
+}
+.MuiInput-root input {
+  color: #ffffff !important;
+}
+.MuiInputAdornment-positionStart {
+  color: #ffffff !important;
+}
+.MuiInput-underline::before {
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.42) !important;
+}
+.MuiInput-underline:hover:not(.Mui-disabled)::before {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.87) !important;
+}
+.MuiInput-underline::after {
+  border-bottom: 2px solid #a6d4fa !important;
+}
+/* End change */
