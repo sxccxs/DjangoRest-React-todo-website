@@ -8,9 +8,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { Person, VpnKey } from "@material-ui/icons";
+import { Alert } from "@material-ui/lab";
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import getCookie from "./utils";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -27,13 +27,29 @@ const useStyles = makeStyles((theme) => ({
   form_text: {
     marginTop: "1rem !important",
   },
+  alert: {
+    alignItems: "center",
+  },
 }));
 
 function Login(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    username: "",
+    email: "",
     password: "",
+  });
+
+  const [message, setMessage] = React.useState(false);
+
+  const [validation, setValidation] = React.useState({
+    password: {
+      error: false,
+      helperText: "",
+    },
+    email: {
+      error: false,
+      helperText: "",
+    },
   });
 
   async function login() {
@@ -41,98 +57,130 @@ function Login(props) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": getCookie("csrftoken"),
       },
       body: JSON.stringify({
-        username: state.username,
+        email: state.email,
         password: state.password,
       }),
     };
-    let responce = await fetch("/api/auth/login/", requestOptions);
-    if (responce.ok) {
-      props.authenticate(true);
+    let response = await fetch("/api/auth/jwt/create/", requestOptions);
+    let json = await response.json();
+    if (response.ok) {
+      await props.setTokens(json.access, json.refresh);
+    } else {
+      if (Object.keys(json).includes("detail")) {
+        setMessage(true);
+      } else {
+        let data = {};
+        for (let error in json) {
+          if (json.hasOwnProperty(error)) {
+            data[error] = {
+              error: true,
+              helperText: json[error].join(" "),
+            };
+          }
+        }
+        for (let s in state) {
+          if (data[s] === undefined) {
+            data[s] = { error: false, helperText: "" };
+          }
+        }
+        setValidation(data);
+      }
+      setState({ ...state, password: "" });
     }
   }
 
-  function _handleChange(e) {
-    console.log(e.target.value);
+  function handleChange(e) {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   }
-  if (!props.isAuthenticated) {
-    return (
-      <div className="form-container">
-        {console.log(props.isAuthenticated)}
-        <Card className={"form " + classes.card}>
-          <CardContent className="form-content">
-            <Typography className="from-header" variant="h5" align="center">
-              Login
-            </Typography>
-            <TextField
-              name="username"
-              required={true}
-              value={state.username}
-              onChange={_handleChange}
-              label="Username"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Person />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              name="password"
-              required={true}
-              value={state.password}
-              onChange={_handleChange}
-              label="Password"
-              type="password"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <VpnKey />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <Button
-              onClick={login}
-              variant="contained"
-              className={"form-button " + classes.button}
-              size="medium"
-            >
-              Submit
-            </Button>
-            <Typography
-              className={classes.form_text}
-              align="center"
-              variant="subtitle1"
-            >
-              <Link className={classes.form_link} to="/reset-password/">
-                Forgot password?
-              </Link>
-            </Typography>
-            <Typography
-              className={classes.form_text}
-              align="center"
-              variant="subtitle1"
-            >
-              Don't have an account?{" "}
-              <Link className={classes.form_link} to="/register/">
-                Sign Up Now!
-              </Link>
-            </Typography>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  } else {
+  if (props.authed) {
     return <Redirect to="/list/" />;
   }
+
+  return (
+    <div className="form-container">
+      <Card className={"form " + classes.card}>
+        <CardContent className="form-content">
+          <Typography className="from-header" variant="h5" align="center">
+            Login
+          </Typography>
+          <TextField
+            error={"error" ? validation.email.error : ""}
+            helperText={validation.email.helperText}
+            name="email"
+            required={true}
+            value={state.email}
+            onChange={handleChange}
+            label="Email"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Person />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            error={"error" ? validation.password.error : ""}
+            helperText={validation.password.helperText}
+            name="password"
+            required={true}
+            value={state.password}
+            onChange={handleChange}
+            label="Password"
+            type="password"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <VpnKey />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {message && (
+            <Alert
+              className={classes.alert}
+              variant="filled"
+              severity="warning"
+            >
+              Email or password is incorrect!
+            </Alert>
+          )}
+          <Button
+            onClick={() => login()}
+            variant="contained"
+            className={"form-button " + classes.button}
+            size="medium"
+          >
+            Submit
+          </Button>
+          <Typography
+            className={classes.form_text}
+            align="center"
+            variant="subtitle1"
+          >
+            <Link className={classes.form_link} to="/reset-password/">
+              Forgot password?
+            </Link>
+          </Typography>
+          <Typography
+            className={classes.form_text}
+            align="center"
+            variant="subtitle1"
+          >
+            Don't have an account?{" "}
+            <Link className={classes.form_link} to="/register/">
+              Sign Up Now!
+            </Link>
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
 
 export default Login;

@@ -1,9 +1,7 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
 
 
 urlpatterns = [
-    path('login/', views.login_user),
-    path('logout/', views.logout_user),
-    path('is-authenticated', views.is_authenticated),
+    path('', include('djoser.urls')),
+    path('', include('djoser.urls.jwt')),
 ]

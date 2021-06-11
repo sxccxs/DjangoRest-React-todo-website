@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Login() {
+function UserActivationSent() {
   const classes = useStyles();
 
   return (
@@ -31,7 +31,7 @@ function Login() {
       <Card className={"form " + classes.card}>
         <CardContent className="form-content">
           <Typography className="from-header" variant="h5" align="center">
-            Reset Password
+            Account Activation
           </Typography>
           <Typography
             className={classes.form_text}
@@ -45,8 +45,8 @@ function Login() {
             align="center"
             variant="subtitle1"
           >
-            We've emailed you instructions for setting your password. You should
-            receive the email shortly!
+            We've emailed you instructions for activating your account. You
+            should receive the email shortly!
           </Typography>
           <Typography
             className={classes.form_text_last}
@@ -64,4 +64,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default UserActivationSent;

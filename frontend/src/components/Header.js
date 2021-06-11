@@ -25,10 +25,17 @@ const useStyles = makeStyles((theme) => ({
   menu_item: {
     margin: "0 1.2rem",
   },
+  logout: {
+    cursor: "pointer",
+  },
 }));
 
 function Header(props) {
   const classes = useStyles();
+
+  const logout = () => {
+    props.updateTokens("", "");
+  };
 
   return (
     <div className={classes.header}>
@@ -41,7 +48,6 @@ function Header(props) {
               alt="todoapp todo todolist"
             />
           </Link>
-
           <Typography className={classes.title_link} variant="h4">
             <Link to="/">To Do App</Link>
           </Typography>
@@ -52,10 +58,14 @@ function Header(props) {
             {props.isAuthenticated ? (
               <>
                 <Typography className={classes.menu_item} variant="h6">
-                  <Link to="/list/">To Do List</Link>{" "}
+                  <Link to="/list/">To Do List</Link>
                 </Typography>
-                <Typography className={classes.menu_item} variant="h6">
-                  <Link to="/logout/">Logout</Link>{" "}
+                <Typography
+                  onClick={logout}
+                  className={classes.menu_item + " " + classes.logout}
+                  variant="h6"
+                >
+                  Logout
                 </Typography>
               </>
             ) : (

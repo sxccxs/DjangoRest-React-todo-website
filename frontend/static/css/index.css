@@ -17,7 +17,6 @@ a {
 /* Global card style */
 .card-container {
   padding: 7rem;
-  height: 100%;
   display: flex;
   justify-content: center;
 }
@@ -45,7 +44,6 @@ a {
   margin-bottom: auto;
 }
 .form-container {
-  height: 100%;
   display: flex;
   justify-content: center;
 }

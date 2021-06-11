@@ -49,7 +49,7 @@ function Home(props) {
             align="center"
           >
             Just{" "}
-            <Link to="/login/" className={classes.card_link}>
+            <Link to="/register/" className={classes.card_link}>
               Sign up
             </Link>{" "}
             to start using.
