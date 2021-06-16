@@ -6,7 +6,7 @@ As a main backend It uses Python [Django](https://www.djangoproject.com/) and [D
 
 As fronted It uses JavaScript [React](https://reactjs.org/) with [MaterialUI](https://material-ui.com/)
 
-## Instalation
+## Installation
 
 If you want to set up this project on your local machine then:
 
