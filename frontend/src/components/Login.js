@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "./styles";
 import {
   Card,
   CardContent,
@@ -12,28 +12,9 @@ import { Alert } from "@material-ui/lab";
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-  },
-  button: {
-    backgroundColor: theme.palette.success.main,
-    color: theme.palette.primary.contrastText,
-  },
-  form_link: {
-    textDecoration: "underline",
-  },
-  form_text: {
-    marginTop: "1rem !important",
-  },
-  alert: {
-    alignItems: "center",
-  },
-}));
-
 function Login(props) {
   const classes = useStyles();
+  console.log(classes.button);
   const [state, setState] = React.useState({
     email: "",
     password: "",
@@ -105,7 +86,7 @@ function Login(props) {
     <div className="form-container">
       <Card className={"form " + classes.card}>
         <CardContent className="form-content">
-          <Typography className="from-header" variant="h5" align="center">
+          <Typography className="form-header" variant="h5" align="center">
             Login
           </Typography>
           <TextField
@@ -159,21 +140,21 @@ function Login(props) {
             Submit
           </Button>
           <Typography
-            className={classes.form_text}
+            className={classes.card_text}
             align="center"
             variant="subtitle1"
           >
-            <Link className={classes.form_link} to="/reset-password/">
+            <Link className={classes.card_link} to="/reset-password/">
               Forgot password?
             </Link>
           </Typography>
           <Typography
-            className={classes.form_text}
+            className={classes.card_text}
             align="center"
             variant="subtitle1"
           >
             Don't have an account?{" "}
-            <Link className={classes.form_link} to="/register/">
+            <Link className={classes.card_link} to="/register/">
               Sign Up Now!
             </Link>
           </Typography>

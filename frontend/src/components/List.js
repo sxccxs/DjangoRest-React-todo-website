@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "./styles";
 import Task from "./Task";
 import {
   Card,
@@ -9,38 +9,6 @@ import {
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-
-const useStyles = makeStyles((theme) => ({
-  card_container: {
-    paddingLeft: "20rem !important",
-    paddingRight: "20rem !important",
-  },
-  card: {
-    minWidth: "41rem",
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  card_header: {
-    marginTop: ".5rem !important",
-    marginBottom: "1rem !important",
-  },
-  input_label: {
-    display: "flex",
-    alignItems: "center",
-  },
-  input: {
-    width: "100%",
-  },
-  button: {
-    maxHeight: "3.4rem",
-    marginLeft: "1rem !important",
-    backgroundColor: theme.palette.success.main,
-    color: theme.palette.primary.contrastText,
-  },
-}));
 
 function List(props) {
   const classes = useStyles();
@@ -132,11 +100,11 @@ function List(props) {
   }
 
   return (
-    <div className={"card-container " + classes.card_container}>
-      <Card className={"card " + classes.card} variant="outlined">
+    <div className="card-container-list">
+      <Card className={"card card-list " + classes.card} variant="outlined">
         <CardContent className="card-content">
           <Typography
-            className={classes.card_header}
+            className="form-header-list"
             variant="subtitle1"
             align="left"
           >
@@ -144,18 +112,18 @@ function List(props) {
             {props.username.charAt(0).toUpperCase() + props.username.slice(1)}{" "}
             !!!
           </Typography>
-          <div className={classes.input_label}>
+          <div className="card-input-list">
             <TextField
               value={searchField}
               onChange={handleChange}
               name="searchField"
-              className={classes.input}
+              className="card-input-field-list"
               label="What do you need today?"
             />
 
             <Button
               onClick={createTask}
-              className={classes.button}
+              className={"card-button-list " + classes.button}
               variant="contained"
               size="medium"
             >

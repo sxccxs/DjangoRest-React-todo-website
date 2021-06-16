@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "./styles";
 import {
   Card,
   CardContent,
@@ -10,20 +10,6 @@ import {
 import { Email } from "@material-ui/icons";
 import React from "react";
 import { Redirect } from "react-router-dom";
-
-const useStyles = makeStyles((theme) => ({
-  card: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-  },
-  button: {
-    backgroundColor: theme.palette.success.main,
-    color: theme.palette.primary.contrastText,
-  },
-  form_input: {
-    marginTop: "1rem !important",
-  },
-}));
 
 function Login() {
   const classes = useStyles();
@@ -74,7 +60,7 @@ function Login() {
     <div className="form-container">
       <Card className={"form " + classes.card}>
         <CardContent className="form-content">
-          <Typography className="from-header" variant="h5" align="center">
+          <Typography className="form-header" variant="h5" align="center">
             Reset Password
           </Typography>
           <Typography align="center" variant="subtitle2">

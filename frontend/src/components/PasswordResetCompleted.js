@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "./styles";
 import {
   Card,
   CardContent,
@@ -11,29 +11,6 @@ import { Alert } from "@material-ui/lab";
 import React from "react";
 import { Link } from "react-router-dom";
 import { VpnKey } from "@material-ui/icons";
-
-const useStyles = makeStyles((theme) => ({
-  card: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-  },
-  button: {
-    backgroundColor: theme.palette.success.main,
-    color: theme.palette.primary.contrastText,
-  },
-  form_link: {
-    textDecoration: "underline",
-  },
-  form_text: {
-    marginBottom: "1rem !important",
-  },
-  form_text_last: {
-    marginTop: "1rem !important",
-  },
-  alert: {
-    alignItems: "center",
-  },
-}));
 
 function PasswordResetCompleted() {
   const classes = useStyles();
@@ -128,11 +105,11 @@ function PasswordResetCompleted() {
     <div className="form-container">
       <Card className={"form " + classes.card}>
         <CardContent className="form-content">
-          <Typography className="from-header" variant="h5" align="center">
+          <Typography className="form-header" variant="h5" align="center">
             Reset Password
           </Typography>
           <Typography
-            className={classes.form_text}
+            className={classes.card_text}
             align="center"
             variant="subtitle1"
           >
