@@ -57,10 +57,6 @@ If you want to set up this project on your local machine then:
    	npm run dev
    ```
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 ## License
 
 [MIT](https://github.com/sxccxs/DjangoRest-React-todo-website/blob/main/LICENSE)
